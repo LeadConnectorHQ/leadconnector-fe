@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Auth / credentials — NEVER commit these
+.npmrc
+ar-login.sh
+
+# Vite internal temp files
+vite.config.ts.timestamp-*.mjs
+
+# Local environment overrides
+.env
+.env.local
+.env.*.local
+
+# Editor & OS
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/

@@ -1,0 +1,104 @@
+/* color palette from <https://github.com/vuejs/theme> */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#app {
+  padding: 50px !important;
+}
+
+html, body,  #app {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#app .n-input .n-input__input input:focus , #app a:focus {
+  outline: none !important;
+  border : none !important;
+  box-shadow: none !important;
+}
+
+#app .n-button {
+  background-color: var(--n-color) !important;
+  color: var(--n-text-color) !important;
+  border: var(--n-border) !important;
+}
+#app .n-button:hover {
+  background-color: var(--n-color-hover) !important;
+  color: var(--n-text-color-hover) !important;
+  border: var(--n-border-hover) !important;
+}
+#app .n-button:active {
+  background-color: var(--n-color-pressed) !important;
+  color: var(--n-text-color-pressed) !important;
+  border: var(--n-border-pressed) !important;
+}
+
+#app .n-tabs.n-tabs--line-type .n-tabs-tab.n-tabs-tab--active, #app .n-tabs.n-tabs--bar-type .n-tabs-tab.n-tabs-tab--active {
+  color: #155EEF !important;
+}
+#app .n-tabs .n-tabs-bar {
+  background-color: #155EEF !important;
+}
+
+.n-tabs.n-tabs--line-type .n-tabs-tab:hover, .n-tabs.n-tabs--bar-type .n-tabs-tab:hover {
+  color: #155EEF !important;
+}
+
+.leadconn-text-sm-regular , .leadconn-text-sm-medium {
+  font-family: sans-serif !important;
+}
+
+/* LC Reviews Widget responsive width classes */
+.lc-reviews-widget-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.lc-reviews-widget-left-panel {
+  width: 100%;
+}
+
+.lc-reviews-widget-right-panel {
+  width: 100%;
+}
+
+.lc-reviews-widget-content {
+  position: relative;
+  display: contents !important;
+}
+
+.lc-reviews-widget-content.flash iframe {
+  position: absolute !important;
+  width: 100%;
+  max-width: 400px !important;
+  z-index: 99 !important;
+}
+
+.lc-reviews-widget-content:not(.flash) iframe {
+  position: relative !important;
+  z-index: 99 !important;
+}
+
+.lc-reviews-widget-content.flash.mobile iframe {
+  max-width: 250px !important;
+}
+
+.lc-reviews-widget-content.flash[class*="top"]:not(.mobile) iframe {
+  margin-top: 60px;
+}
+
+/* Desktop layout */
+@media (min-width: 1024px) {
+  .lc-reviews-widget-container {
+    flex-direction: row;
+  }
+  
+  .lc-reviews-widget-left-panel {
+    width: 75%;
+  }
+  
+  .lc-reviews-widget-right-panel {
+    width: 25%;
+  }
+}
