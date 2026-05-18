@@ -7,13 +7,13 @@ export const getApiURL = function(
   directEndpoint = false
 ): string {
   // eslint-disable-next-line
-  const lc_admin_settings = (window as any).lc_admin_settings;
+  const leadconnector_admin_settings = (window as any).leadconnector_admin_settings;
   
   // Check if proxy_url already contains query parameters
-  const separator = lc_admin_settings.proxy_url.includes('?') ? '&' : '?'; // Only this is needed as we already moved to route register api of wordpress
-  let apiURL = `${lc_admin_settings.proxy_url}${separator}endpoint=${encodeURIComponent(
+  const separator = leadconnector_admin_settings.proxy_url.includes('?') ? '&' : '?'; // Only this is needed as we already moved to route register api of wordpress
+  let apiURL = `${leadconnector_admin_settings.proxy_url}${separator}endpoint=${encodeURIComponent(
     endpoint
-  )}&_wpnonce=${lc_admin_settings.nonce}&direct_endpoint=${String(
+  )}&_wpnonce=${leadconnector_admin_settings.nonce}&direct_endpoint=${String(
     directEndpoint
   )}`;
   if (data) {
@@ -76,12 +76,12 @@ const LEAD_CONNECTOR_OAUTH_CALLBACK_URL =
 const currentURL = window.location.origin;
 
 export const LEAD_CONNECTOR_OAUTH_URL =
-  config.LC_ROOT_DOMAIN + "/oauth/chooselocation?response_type=code&redirect_uri=" +
+  config.LEAD_CONNECTOR_ROOT_DOMAIN + "/oauth/chooselocation?response_type=code&redirect_uri=" +
   LEAD_CONNECTOR_OAUTH_CALLBACK_URL +
   "&client_id=" +
   config.LEAD_CONNECTOR_OAUTH_CLIENT_ID +
   "&scope=funnels/funnel.readonly%20funnels/page.readonly%20wordpress.site.readonly&state=" +
   currentURL;
 
-export const LC_PROD_BASE_URL = config.LC_BASE_URL;
-export const LC_BASE_URL = config.LC_BASE_URL;
+export const LC_PROD_BASE_URL = config.LEAD_CONNECTOR_APP_BASE_URL;
+export const LC_BASE_URL = config.LEAD_CONNECTOR_APP_BASE_URL;

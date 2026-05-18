@@ -10,8 +10,14 @@ import { defineComponent } from 'vue'
 </script>
 <template>
   <NAlert v-bind="$attrs">
-    <slot></slot>
-    <template #header><slot name="header" /></template>
+    <template #header>
+      <slot name="header" />
+      <slot name="title" />
+    </template>
+    <template #default>
+      <slot name="content"><slot /></slot>
+      <slot name="actions" />
+    </template>
     <template #icon><slot name="icon" /></template>
   </NAlert>
 </template>

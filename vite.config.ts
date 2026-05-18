@@ -12,8 +12,8 @@ export default defineConfig({
     sourcemap : false,
     rollupOptions: {
       output: {
+        format: 'iife',
         entryFileNames : 'app.js',
-        chunkFileNames : 'chunk-vendors.js',
         assetFileNames : 'app.css'
       }
     }
