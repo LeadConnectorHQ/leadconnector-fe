@@ -17,7 +17,7 @@ const localState = reactive({
 });
 
 const lcAdminSettings = {
-  ...(window as any).lc_admin_settings,
+  ...(window as any).leadconnector_admin_settings,
   baseURL: LC_BASE_URL,
 };
 provide("lcAdminSettings", lcAdminSettings);

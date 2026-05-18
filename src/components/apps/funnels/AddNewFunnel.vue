@@ -32,30 +32,39 @@ const props = defineProps<{
   mode?: string;
 }>();
 
-const localStateInit = {
-  templateId: -1,
+function getDefaultFormFields() {
+  return {
+    templateId: -1,
+    selectedFunnelId: "",
+    selectedStepId: "",
+    selectedPageDisplayMethod: "",
+    shouldIncludeTrackingCode: true,
+    shouldIncludeFavicon: true,
+    customSlug: "",
+    previewURL: "",
+    errorMessage: "",
+    disableDefaultLayoutCheckbox: true,
+    shouldIncludeDefaultWordPressLayout: false,
+    swtichFlipedUsingDefaultLayout: false,
+    importLoading: false,
+  };
+}
+
+const localState = reactive({
   loading: true,
-  importLoading: false,
   showModal: false,
   funnelsList: [] as Funnel[],
   funnelOptions: [] as SelectBaseOption[],
   stepOptions: [] as SelectBaseOption[],
   selectedFunnel: {} as Funnel,
   selectedStep: {} as FunnelStep,
-  selectedFunnelId: "",
-  selectedStepId: "",
-  selectedPageDisplayMethod: "",
-  shouldIncludeTrackingCode: true as boolean,
-  shouldIncludeFavicon: true as boolean,
-  customSlug: "",
-  previewURL: "",
-  errorMessage: "",
-  disableDefaultLayoutCheckbox: true as boolean,
-  shouldIncludeDefaultWordPressLayout: false as boolean,
-  swtichFlipedUsingDefaultLayout: false as boolean,
-};
+  ...getDefaultFormFields(),
+});
 
-const localState = reactive(localStateInit);
+function resetFormFields() {
+  Object.assign(localState, getDefaultFormFields());
+  localState.stepOptions = [];
+}
 /**
  * Function to get the website host url (origin)
  */
@@ -112,15 +121,7 @@ const importSelectedFunnel = async () => {
     return false;
   }
 
-  localState.selectedFunnelId = "";
-  localState.selectedStepId = "";
-  localState.selectedPageDisplayMethod = "";
-  localState.shouldIncludeTrackingCode = true;
-  localState.shouldIncludeFavicon = true;
-  localState.shouldIncludeDefaultWordPressLayout = false;
-  localState.customSlug = "";
-  localState.previewURL = "";
-
+  resetFormFields();
   emit("fetch-funnels");
   return true;
 };
@@ -129,10 +130,12 @@ const lcOptions = inject("lcOptions") as SettingResponse;
 const lcAdminSettings = inject("lcAdminSettings") as BasicSettings;
 
 const showModal = () => {
+  resetFormFields();
   localState.showModal = true;
 };
 const cancelCallback = () => {
   localState.showModal = false;
+  resetFormFields();
   emit("modal-close");
 };
 
