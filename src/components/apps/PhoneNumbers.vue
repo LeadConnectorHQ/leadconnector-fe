@@ -267,7 +267,9 @@ const copyText = (text: string) => {
                 readonly
                 class="outline-none"
                 :value="
-                  '[lc_phone_number_pool id=' + localState.selectedPool.id + ']'
+                  '[leadconnector_phone_number_pool id=' +
+                  localState.selectedPool.id +
+                  ']'
                 "
               />
               <div class="flex items-center w-1/5">
@@ -281,7 +283,7 @@ const copyText = (text: string) => {
                       class="w-6 bg-white cursor-pointer ml-3"
                       @click="
                         copyText(
-                          '[lc_phone_number_pool id=' +
+                          '[leadconnector_phone_number_pool id=' +
                             localState.selectedPool.id +
                             ']',
                         )

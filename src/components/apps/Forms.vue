@@ -159,7 +159,7 @@ watch(
 );
 
 const currentShortcode = computed(() => {
-  return `[lc_form id='${localState.selectedForm._id}' title='${localState.selectedForm.name}' ]`;
+  return `[leadconnector_form id='${localState.selectedForm._id}' title='${localState.selectedForm.name}' ]`;
 });
 
 const copyCodeToClipboard = (value: string) => {

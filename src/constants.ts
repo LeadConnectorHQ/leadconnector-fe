@@ -1,20 +1,23 @@
-import { config } from './config';
+import { config } from "./config";
 
 export const PERMAS_LINKS_ERROR_STR = `It seems like your account's Permalink Settings set to 'plain', please change it in order to use this plugin, more info <a href='https://wordpress.org/support/article/settings-permalinks-screen/' target='_blank'>here.</a>`;
-export const getApiURL = function(
+export const getApiURL = function (
   endpoint: string,
   data?: object,
-  directEndpoint = false
+  directEndpoint = false,
 ): string {
   // eslint-disable-next-line
-  const leadconnector_admin_settings = (window as any).leadconnector_admin_settings;
-  
+  const leadconnector_admin_settings = (window as any)
+    .leadconnector_admin_settings;
+
   // Check if proxy_url already contains query parameters
-  const separator = leadconnector_admin_settings.proxy_url.includes('?') ? '&' : '?'; // Only this is needed as we already moved to route register api of wordpress
+  const separator = leadconnector_admin_settings.proxy_url.includes("?")
+    ? "&"
+    : "?"; // Only this is needed as we already moved to route register api of wordpress
   let apiURL = `${leadconnector_admin_settings.proxy_url}${separator}endpoint=${encodeURIComponent(
-    endpoint
+    endpoint,
   )}&_wpnonce=${leadconnector_admin_settings.nonce}&direct_endpoint=${String(
-    directEndpoint
+    directEndpoint,
   )}`;
   if (data) {
     apiURL = apiURL + `&data=${JSON.stringify(data)}`;
@@ -24,13 +27,13 @@ export const getApiURL = function(
 };
 
 export const COLUMNS_KEYS = {
-  STEP_NAME: "lc_step_name",
-  FUNNEL_NAME: "lc_funnel_name",
+  STEP_NAME: "leadconnector_step_name",
+  FUNNEL_NAME: "leadconnector_funnel_name",
   PAGE_URL: "url",
   EDIT_URL: "edit_url",
   MODIFIED_DATE: "human_modified_date",
   CONTEXT: "context",
-  SLUG: "slug"
+  SLUG: "slug",
 };
 
 export const POSTS_TABLE_COLUMNS = [
@@ -38,7 +41,7 @@ export const POSTS_TABLE_COLUMNS = [
   {
     key: COLUMNS_KEYS.FUNNEL_NAME,
     label: "Funnel Name",
-    sortable: true
+    sortable: true,
   },
   { key: COLUMNS_KEYS.SLUG, label: "Slug", sortable: true },
   { key: COLUMNS_KEYS.PAGE_URL, label: "View", sortable: true },
@@ -47,9 +50,9 @@ export const POSTS_TABLE_COLUMNS = [
   {
     key: COLUMNS_KEYS.MODIFIED_DATE,
     label: "Last Modified",
-    sortable: true
+    sortable: true,
   },
-  { key: COLUMNS_KEYS.CONTEXT, label: "", sortable: false }
+  { key: COLUMNS_KEYS.CONTEXT, label: "", sortable: false },
 ];
 
 export const DISPLAY_METHOD = ["iframe", "redirect", "native"];
@@ -57,7 +60,7 @@ export const DISPLAY_METHOD = ["iframe", "redirect", "native"];
 export const DISPLAY_METHOD_OPTIONS = [
   { value: DISPLAY_METHOD[0], text: "Embed Full Page iFrame" },
   { value: DISPLAY_METHOD[1], text: "Redirect to Funnel URL" },
-  { value: DISPLAY_METHOD[2], text: "Native Embed" }
+  { value: DISPLAY_METHOD[2], text: "Native Embed" },
 ];
 
 export const MESSAGES = {
@@ -68,20 +71,25 @@ export const MESSAGES = {
   DELETE_POST_API_FAIL: "Failed to delete the post",
   POST_DELETED_SUCCESS: "Post deleted successfully",
   POST_CREATED_SUCCESS: "Post created successfully",
-  POST_UPDATED_SUCCESS: "Post updated successfully"
+  POST_UPDATED_SUCCESS: "Post updated successfully",
 };
 
-const LEAD_CONNECTOR_OAUTH_CALLBACK_URL =
-  `${config.LEAD_CONNECTOR_SERVICES_BASE_URL}wordpress/lc-plugin/callback`;
-const currentURL = window.location.origin;
+const LEAD_CONNECTOR_OAUTH_CALLBACK_URL = `${config.LEAD_CONNECTOR_SERVICES_BASE_URL}wordpress/lc-plugin/callback`;
+const currentURL = window.location.href;
 
-export const LEAD_CONNECTOR_OAUTH_URL =
-  config.LEAD_CONNECTOR_ROOT_DOMAIN + "/oauth/chooselocation?response_type=code&redirect_uri=" +
-  LEAD_CONNECTOR_OAUTH_CALLBACK_URL +
-  "&client_id=" +
-  config.LEAD_CONNECTOR_OAUTH_CLIENT_ID +
-  "&scope=funnels/funnel.readonly%20funnels/page.readonly%20wordpress.site.readonly&state=" +
-  currentURL;
+const oauthUrl = new URL(
+  "/oauth/chooselocation",
+  config.LEAD_CONNECTOR_ROOT_DOMAIN,
+);
+oauthUrl.searchParams.set("response_type", "code");
+oauthUrl.searchParams.set("redirect_uri", LEAD_CONNECTOR_OAUTH_CALLBACK_URL);
+oauthUrl.searchParams.set("client_id", config.LEAD_CONNECTOR_OAUTH_CLIENT_ID);
+oauthUrl.searchParams.set(
+  "scope",
+  "funnels/funnel.readonly funnels/page.readonly wordpress.site.readonly",
+);
+oauthUrl.searchParams.set("state", currentURL);
+export const LEAD_CONNECTOR_OAUTH_URL = oauthUrl.toString();
 
 export const LC_PROD_BASE_URL = config.LEAD_CONNECTOR_APP_BASE_URL;
 export const LC_BASE_URL = config.LEAD_CONNECTOR_APP_BASE_URL;

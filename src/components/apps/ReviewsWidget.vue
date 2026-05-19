@@ -58,7 +58,12 @@
       >
         <div class="relative">
           <img
-            :src="pluginAssetUrl(lcOptions.plugin_directory_url, 'images/leadconnector-no-data-found.svg')"
+            :src="
+              pluginAssetUrl(
+                lcOptions.plugin_directory_url,
+                'images/leadconnector-no-data-found.svg',
+              )
+            "
             alt="No Data"
           />
         </div>
@@ -578,7 +583,7 @@ const currentShortcode = computed(() => {
   const widgetId = selectedWidget ? localState.selectedWidget : "";
   const widgetName = selectedWidget ? selectedWidget.name : "Review Widget";
 
-  return `[lc_reviews_widget id='${widgetId}' title='${widgetName}']`;
+  return `[leadconnector_reviews_widget id='${widgetId}' title='${widgetName}']`;
 });
 
 const copyCodeToClipboard = (value: string) => {

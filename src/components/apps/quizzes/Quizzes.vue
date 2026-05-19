@@ -84,7 +84,7 @@ function openQuizEmbedModal(quiz: QuizRow) {
 }
 
 function getEmbedCode() {
-  return `[lc_quiz id="${localState.selectedQuiz.id}" title="${localState.selectedQuiz.name}"]`;
+  return `[leadconnector_quiz id="${localState.selectedQuiz.id}" title="${localState.selectedQuiz.name}"]`;
 }
 
 function copyQuizEmbedCode() {

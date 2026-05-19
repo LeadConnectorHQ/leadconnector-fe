@@ -24,7 +24,7 @@ const continueToDashboard = () => {
   window.history.pushState(
     {},
     document.title,
-    "/wp-admin/admin.php?page=lc-plugin",
+    "/wp-admin/admin.php?page=leadconnector-plugin",
   );
   emit("init-checks");
   urlParams.delete("code");

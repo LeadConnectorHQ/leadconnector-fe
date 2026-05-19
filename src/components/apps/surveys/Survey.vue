@@ -84,7 +84,7 @@ function openSurveyEmbedModal(survey: SurveyRow) {
 }
 
 function getEmbedCode() {
-  return `[lc_survey id="${localState.selectedSurvey.id}" title="${localState.selectedSurvey.name}"]`;
+  return `[leadconnector_survey id="${localState.selectedSurvey.id}" title="${localState.selectedSurvey.name}"]`;
 }
 
 function copySurveyEmbedCode() {

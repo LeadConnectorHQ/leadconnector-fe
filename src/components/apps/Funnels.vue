@@ -96,8 +96,8 @@ const columns = [
   },
   {
     title: "Funnel Name",
-    dataIndex: "lc_funnel_name",
-    key: "lc_funnel_name",
+    dataIndex: "leadconnector_funnel_name",
+    key: "leadconnector_funnel_name",
     width: "30%",
     render: (row: any) => {
       return h(
@@ -123,7 +123,7 @@ const columns = [
             {
               class: "ml-2",
             },
-            row.lc_funnel_name,
+            row.leadconnector_funnel_name,
           ),
           // h('div', {
           //     class: 'ml-2 flex items-center'
@@ -178,8 +178,8 @@ const columns = [
   },
   {
     title: "Step",
-    dataIndex: "lc_step_name",
-    key: "lc_step_name",
+    dataIndex: "leadconnector_step_name",
+    key: "leadconnector_step_name",
   },
   {
     title: "Actions",
@@ -264,7 +264,7 @@ watch(
   () => localState.selectedMenuOption,
   () => {
     if (localState.selectedMenuOption == "builderEdit") {
-      const editFunnelUrl = `${ensureHttps(lcHost as string)}/location/${lcOptions.location_id}/funnels-websites/funnels/${localState.selectedFunnel.lc_funnel_id}/steps/${localState.selectedFunnel.lc_step_id}`;
+      const editFunnelUrl = `${ensureHttps(lcHost as string)}/location/${lcOptions.location_id}/funnels-websites/funnels/${localState.selectedFunnel.leadconnector_funnel_id}/steps/${localState.selectedFunnel.leadconnector_step_id}`;
 
       window.open(editFunnelUrl, "_blank");
 
@@ -301,7 +301,7 @@ watch(
           :loading="localState.loading"
           :key="
             (row: LeadConnectorPost) => {
-              return row.lc_funnel_id as string;
+              return row.leadconnector_funnel_id as string;
             }
           "
           :columns="columns"

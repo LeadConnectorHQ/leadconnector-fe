@@ -46,7 +46,6 @@ const lcConnectionMethod = inject("lcConnectionMethod") as string;
 const lcOptions = inject("lcOptions") as SettingResponse;
 const lcAdminSettings = inject("lcAdminSettings") as BasicSettings;
 
-
 let lcHost = lcOptions.white_label_url || lcAdminSettings.baseURL;
 
 if (lcConnectionMethod == "api_key")
@@ -144,7 +143,7 @@ const copyText = () => {
 
 function buildCalendarShortcode(calendar: CalendarRow): string {
   if (!calendar.id) return "";
-  return `[lc_calendar id="${calendar.id}"]`;
+  return `[leadconnector_calendar id="${calendar.id}"]`;
 }
 
 watch(
@@ -215,10 +214,7 @@ const columnsHeadings = [
     title: "Duration",
     key: "duration",
     render(row: CalendarRow) {
-      return h(
-        UITextSmRegular,
-        formatSlotDuration(row.slotDuration),
-      );
+      return h(UITextSmRegular, formatSlotDuration(row.slotDuration));
     },
   },
   {

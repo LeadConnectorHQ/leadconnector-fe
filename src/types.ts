@@ -68,20 +68,20 @@ export interface LeadConnectorPost {
   funnel_step_url?: string;
   human_date?: string;
   human_modified_date?: string;
-  lc_display_method: typeof DISPLAY_METHOD[number];
-  lc_funnel_id?: string;
-  lc_funnel_name?: string;
-  lc_step_id?: string;
-  lc_step_name?: string;
+  leadconnector_display_method: typeof DISPLAY_METHOD[number];
+  leadconnector_funnel_id?: string;
+  leadconnector_funnel_name?: string;
+  leadconnector_step_id?: string;
+  leadconnector_step_name?: string;
   location_id?: string;
   slug?: string;
   status?: string;
   template_id?: number;
   title?: string;
   url?: string;
-  lc_include_tracking_code?: string;
-  lc_use_site_favicon ?: string;
-  lc_include_wp_headers_and_footers ?: string;
+  leadconnector_include_tracking_code?: string;
+  leadconnector_use_site_favicon?: string;
+  leadconnector_include_wp_headers_and_footers?: string;
 }
 
 export interface FunnelsResponse extends WP_APIResponse {

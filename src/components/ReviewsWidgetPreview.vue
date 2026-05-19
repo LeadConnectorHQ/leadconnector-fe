@@ -7,7 +7,7 @@
           ref="iframeRef"
           :key="iframeKey"
           :src="iframeSrc"
-          class="lc_reviews_widget"
+          class="leadconnector_reviews_widget lc_reviews_widget"
           :style="iframeStyles"
           frameborder="0"
           scrolling="no"

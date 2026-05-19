@@ -89,26 +89,26 @@ const importSelectedFunnel = async () => {
     );
 
   const dataObj = {
-    lc_funnel_name: selectedFunnel?.name,
-    lc_step_url: localState.previewURL,
-    lc_slug: localState.customSlug,
-    lc_step_id: localState.selectedStepId,
-    lc_funnel_id: localState.selectedFunnelId,
-    lc_step_name: selectedStep?.name,
-    lc_step_page_id: Array.isArray(selectedStep?.pages)
+    leadconnector_funnel_name: selectedFunnel?.name,
+    leadconnector_step_url: localState.previewURL,
+    leadconnector_slug: localState.customSlug,
+    leadconnector_step_id: localState.selectedStepId,
+    leadconnector_funnel_id: localState.selectedFunnelId,
+    leadconnector_step_name: selectedStep?.name,
+    leadconnector_step_page_id: Array.isArray(selectedStep?.pages)
       ? selectedStep.pages[0]
       : null,
     template_id: localState.templateId, // -1, Currently Unavailable
-    lc_display_method: localState.selectedPageDisplayMethod,
-    lc_step_meta: null, //  selectedStep?.meta,  Currently Unavailable
-    lc_step_page_download_url: null, // selectedStep?.pageDataDownloadURL,
-    lc_include_tracking_code: localState.shouldIncludeTrackingCode,
-    lc_use_site_favicon: localState.shouldIncludeFavicon,
-    lc_funnel_tracking_code: {
+    leadconnector_display_method: localState.selectedPageDisplayMethod,
+    leadconnector_step_meta: null, //  selectedStep?.meta,  Currently Unavailable
+    leadconnector_step_page_download_url: null, // selectedStep?.pageDataDownloadURL,
+    leadconnector_include_tracking_code: localState.shouldIncludeTrackingCode,
+    leadconnector_use_site_favicon: localState.shouldIncludeFavicon,
+    leadconnector_funnel_tracking_code: {
       headerCode: btoa(selectedFunnel?.trackingCodeHead || ""),
       footerCode: btoa(selectedFunnel?.trackingCodeBody || ""),
     },
-    lc_include_wp_headers_and_footers:
+    leadconnector_include_wp_headers_and_footers:
       localState.shouldIncludeDefaultWordPressLayout,
   };
 
@@ -178,20 +178,20 @@ onMounted(async () => {
 
   localState.funnelOptions = options;
   if (props.mode == "edit" && props.editPost) {
-    localState.selectedFunnelId = props.editPost.lc_funnel_id as string;
+    localState.selectedFunnelId = props.editPost.leadconnector_funnel_id as string;
   }
   localState.funnelsList = funnelsList;
 
   if (props.mode == "edit" && props.editPost) {
     localState.templateId = props.editPost.template_id as number;
-    localState.selectedStepId = props.editPost.lc_step_id as string;
+    localState.selectedStepId = props.editPost.leadconnector_step_id as string;
 
     localState.selectedPageDisplayMethod = props.editPost
-      .lc_display_method as string;
+      .leadconnector_display_method as string;
     localState.shouldIncludeTrackingCode =
-      props.editPost.lc_include_tracking_code == "1" ? true : false;
+      props.editPost.leadconnector_include_tracking_code == "1" ? true : false;
     localState.shouldIncludeFavicon =
-      props.editPost.lc_use_site_favicon == "1" ? true : false;
+      props.editPost.leadconnector_use_site_favicon == "1" ? true : false;
     // localState.shouldIncludeFavicon = props.editPost.;
     localState.customSlug = props.editPost.slug as string;
     localState.showModal = true;
@@ -202,7 +202,7 @@ onMounted(async () => {
 
     localState.previewURL = props.editPost.funnel_step_url as string;
     localState.shouldIncludeDefaultWordPressLayout =
-      props.editPost.lc_include_wp_headers_and_footers == "1" ? true : false;
+      props.editPost.leadconnector_include_wp_headers_and_footers == "1" ? true : false;
   }
 
   localState.loading = false;
