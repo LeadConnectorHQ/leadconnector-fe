@@ -178,7 +178,8 @@ onMounted(async () => {
 
   localState.funnelOptions = options;
   if (props.mode == "edit" && props.editPost) {
-    localState.selectedFunnelId = props.editPost.leadconnector_funnel_id as string;
+    localState.selectedFunnelId = props.editPost
+      .leadconnector_funnel_id as string;
   }
   localState.funnelsList = funnelsList;
 
@@ -202,7 +203,9 @@ onMounted(async () => {
 
     localState.previewURL = props.editPost.funnel_step_url as string;
     localState.shouldIncludeDefaultWordPressLayout =
-      props.editPost.leadconnector_include_wp_headers_and_footers == "1" ? true : false;
+      props.editPost.leadconnector_include_wp_headers_and_footers == "1"
+        ? true
+        : false;
   }
 
   localState.loading = false;
@@ -308,7 +311,7 @@ watch(
         ?.pages?.[0];
     }
     if (stepPage) {
-      localState.previewURL = `${ensureHttps(lcHost as string)}/v2/preview/${stepPage}`;
+      localState.previewURL = `${ensureHttps(lcHost as string)}/preview/${stepPage}`;
     } else {
       localState.previewURL = "";
     }

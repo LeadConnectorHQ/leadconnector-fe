@@ -7,13 +7,24 @@ import { onMounted, ref } from "vue";
 const isAuthorizing = ref(false);
 const emit = defineEmits(["init-checks"]);
 
+const getOAuthCodeFromUrl = (urlParams: URLSearchParams): string | null => {
+  const prefixed = urlParams.get("leadconnector_token");
+  if (prefixed && prefixed.length === 40) {
+    return prefixed;
+  }
+  const legacy = urlParams.get("code");
+  if (legacy && legacy.length === 40) {
+    return legacy;
+  }
+  return null;
+};
+
 const checkForOAuthAuthorization = async () => {
   const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get("code") && urlParams.get("code")?.length == 40) {
-    // Cross check this with @Gaurav Kanted if it will always be 40 chars
+  const authCode = getOAuthCodeFromUrl(urlParams);
+  if (authCode) {
     isAuthorizing.value = true;
-    await BackendService.ValidateAuthCode(urlParams.get("code") as string);
-
+    await BackendService.ValidateAuthCode(authCode);
     isAuthorizing.value = false;
   }
 };
@@ -27,6 +38,7 @@ const continueToDashboard = () => {
     "/wp-admin/admin.php?page=leadconnector-plugin",
   );
   emit("init-checks");
+  urlParams.delete("leadconnector_token");
   urlParams.delete("code");
 };
 

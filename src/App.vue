@@ -21,9 +21,9 @@ const lcAdminSettings = {
   baseURL: LC_BASE_URL,
 };
 provide("lcAdminSettings", lcAdminSettings);
-const urlParamsCode = new URLSearchParams(window.location.search).get(
-  "lc_code",
-);
+const urlParamsCode =
+  new URLSearchParams(window.location.search).get("leadconnector_token") ||
+  new URLSearchParams(window.location.search).get("lc_code");
 
 async function initChecks() {
   localState.initialLoading = true;
@@ -32,9 +32,9 @@ async function initChecks() {
   const respond = await BackendService.Common.GetLCOptions();
   localState.lcOptions = respond;
 
-  const urlParamsCodeRefreshed = new URLSearchParams(
-    window.location.search,
-  ).get("lc_code");
+  const searchParams = new URLSearchParams(window.location.search);
+  const urlParamsCodeRefreshed =
+    searchParams.get("leadconnector_token") || searchParams.get("lc_code");
 
   if (!(urlParamsCodeRefreshed && urlParamsCodeRefreshed?.length == 40)) {
     const baseChecks = await BackendService.ValidateAuthToken();
