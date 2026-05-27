@@ -145,7 +145,7 @@ const fetchLcOptions = async () => {
   try {
     const { enable_text_widget, selected_chat_widget_id } =
       await BackendService.Common.GetLCOptions();
-    localState.isTextWidgetEnabled = enable_text_widget === "1";
+    localState.isTextWidgetEnabled = enable_text_widget == "1";
     localState.selectedChatWidget = selected_chat_widget_id
       ? { value: selected_chat_widget_id, label: "" }
       : null;
