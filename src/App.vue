@@ -83,6 +83,8 @@ onMounted(async () => {
 .lc-app {
   padding: 32px 100px;
   background-color: #ffffff !important;
+  min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+  box-sizing: border-box;
 }
 </style>
 <style>
@@ -90,9 +92,22 @@ body
   .n-notification-container.n-notification-container--scrollable.n-notification-container--top-right {
   z-index: 999999 !important;
 }
-#wpbody,
-#wpbody-content {
+
+html:not(.lc-auth-wall-active) #wpwrap,
+html:not(.lc-auth-wall-active) #wpcontent,
+html:not(.lc-auth-wall-active) #wpbody,
+html:not(.lc-auth-wall-active) #wpbody-content,
+html:not(.lc-auth-wall-active) #app {
   background-color: #fff !important;
+  min-height: calc(100vh - var(--wp-admin--admin-bar--height, 32px));
+}
+
+html:not(.lc-auth-wall-active) #wpbody-content {
+  padding-bottom: 0 !important;
+}
+
+html:not(.lc-auth-wall-active) #wpfooter {
+  display: none !important;
 }
 .lc-card-border {
   border: 1px solid #ddd !important;

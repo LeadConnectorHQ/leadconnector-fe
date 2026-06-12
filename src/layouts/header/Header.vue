@@ -17,6 +17,7 @@ import Funnels from "@/components/apps/Funnels.vue";
 import ChatWidget from "@/components/apps/ChatWidget.vue";
 import Emails from "@/components/apps/Emails.vue";
 import BackendService from "@/services";
+import { LC_SUPPORT_BUTTON_TEXT, LC_SUPPORT_URL } from "@/constants";
 import {
   CheckCircleIcon,
   DotsVerticalIcon,
@@ -57,6 +58,10 @@ const menuOptions = [
     value: "disconnect",
   },
 ] as SelectBaseOption[];
+
+const openSupportPage = () => {
+  window.open(LC_SUPPORT_URL, "_blank", "noopener,noreferrer");
+};
 
 const moreOptions = computed(
   () =>
@@ -103,7 +108,7 @@ const openOAuth = async () => {
 watch(
   () => localState.selectedMenuOption,
   (val) => {
-    if (val == "disconnect") {
+    if (val === "disconnect") {
       localState.showDisconnectModal = true;
     }
   },
@@ -225,17 +230,43 @@ onMounted(() => {
     >
       <span class="text-3xl font-semibold flex m-0"> LeadConnector </span>
 
-      <div class="flex items-center">
-        <div class="flex items-center">
-          <div
-            class="inline-flex items-center justify-self-center justify-items-center"
-          >
+      <div class="flex items-center gap-2">
+        <UIButton
+          id="send-feedback-btn"
+          ghost
+          :size="'small'"
+          class="lc-send-feedback-btn"
+          @click="openSupportPage"
+        >
+          <span class="inline-flex items-center gap-2">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M14 7.667C14 11.244 11.244 14 7.667 14C6.978 14 6.311 13.878 5.689 13.656L2 14.667L3.011 11.022C2.756 10.378 2.556 9.689 2.511 8.956C2.5 8.856 2.5 8.756 2.5 8.667C2.5 5.089 5.089 2.5 8.667 2.5C12.244 2.5 14 5.089 14 7.667Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span class="font-medium">{{ LC_SUPPORT_BUTTON_TEXT }}</span>
+          </span>
+        </UIButton>
+
+        <div class="inline-flex items-center gap-2">
             <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              class="shrink-0"
             >
               <rect
                 width="24"
@@ -255,28 +286,26 @@ onMounted(() => {
             </svg>
 
             <span
-              class="flex items-center justify-center justify-items-center bg-success-100 rounded-2xl ml-3 px-2"
+              class="inline-flex items-center h-8 px-3 bg-success-50 border border-success-200 rounded-full text-sm text-success-700"
             >
-              <span class="font-medium inline-flex justify-self-center">
+              <span class="font-medium whitespace-nowrap">
                 Connected to LeadConnector
               </span>
-              <CheckCircleIcon
-                class="w-4 h-4 pl-3 inline-flex justify-self-center text-green-600"
-              />
+              <CheckCircleIcon class="w-4 h-4 ml-2 shrink-0 text-green-600" />
             </span>
-          </div>
         </div>
 
-        <UIPopselect
-          id="more-options"
-          trigger="click"
-          placement="bottom-end"
-          class="ml-3"
-          :options="menuOptions"
-          v-model:value="localState.selectedMenuOption"
-        >
-          <DotsVerticalIcon class="w-4 h-4 cursor-pointer" />
-        </UIPopselect>
+        <div class="inline-flex items-center justify-center h-8 w-8 rounded-md hover:bg-gray-100">
+          <UIPopselect
+            id="more-options"
+            trigger="click"
+            placement="bottom-end"
+            :options="menuOptions"
+            v-model:value="localState.selectedMenuOption"
+          >
+            <DotsVerticalIcon class="w-4 h-4 cursor-pointer text-gray-600" />
+          </UIPopselect>
+        </div>
       </div>
     </div>
     <div class="row nav-bar">
@@ -373,4 +402,10 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.lc-send-feedback-btn {
+  height: 32px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+</style>

@@ -457,9 +457,3 @@ const lcConnectionMethod = inject('lcConnectionMethod');
 
         
 </template>
-
-<style>
-    #wpfooter {
-        display: none;
-    }
-</style>
