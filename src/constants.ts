@@ -93,3 +93,6 @@ export const LEAD_CONNECTOR_OAUTH_URL = oauthUrl.toString();
 
 export const LC_PROD_BASE_URL = config.LEAD_CONNECTOR_APP_BASE_URL;
 export const LC_BASE_URL = config.LEAD_CONNECTOR_APP_BASE_URL;
+export const LC_SUPPORT_URL = "https://wordpress.leadconnectorhq.com/support";
+export const LC_SUPPORT_BUTTON_TEXT = "Send feedback";
+export const LC_SUPPORT_LINK_TEXT = "Submit feedback or report an issue";

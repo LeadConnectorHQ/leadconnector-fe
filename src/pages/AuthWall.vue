@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { UIButton, UIInput } from '@/ui';
 import BackendService from '../services';
+import SupportLink from '@/components/SupportLink.vue';
 import { ref , onMounted, reactive, onUnmounted} from 'vue';
 
 const isAuthorizing = ref(false);
@@ -35,9 +36,14 @@ addEventListener("focus", (event) => {
 
 
 
+onMounted(() => {
+    document.documentElement.classList.add('lc-auth-wall-active');
+});
+
 onUnmounted(() => {
+    document.documentElement.classList.remove('lc-auth-wall-active');
     window.clearInterval(checkInterval);
-})
+});
 
 const saveAPIKey = async () => {
     isAuthorizing.value = true;
@@ -51,14 +57,15 @@ const saveAPIKey = async () => {
 
 <template>
     <div class='lc-auth-wall flex row h-full'>
-        <div class='w-1/2 h-full flex flex-col items-center justify-center pl-10 bg-white'>
+        <div class='w-1/2 h-full flex flex-col bg-white'>
+            <div class="flex-1 flex flex-col items-center justify-center pl-10 pr-10">
             <div class="w-1/2">
                 <div>
                     <h1 class="text-3xl mb-0 font-sans font-medium" > Welcome </h1>
                     <p class='text-lg mt-2 text-gray-600'> Get started by signing into your account </p>
                 </div>
                 <div class='row connect-btn-wrap pt-3'>
-                    <UIButton id='oauth-account-connect' class="w-full"  ghost  @click="connectAccount" :loading=isAuthorizing> 
+                    <UIButton id='oauth-account-connect' class="w-full" ghost @click="connectAccount" :loading=isAuthorizing> 
                         <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="24" height="24" rx="12" transform="matrix(1 0 0 -1 0.25 24)" fill="#FF692F"/>
                             <path d="M11.972 11.3392C11.6605 11.5191 11.4686 11.8516 11.4686 12.2113V15.567L8.70022 13.9687L8.71114 9.66222C8.71114 9.39926 8.57083 9.15622 8.34309 9.02476L6.78804 8.12702L12.1199 5.04869L17.4938 8.15121L11.972 11.3392ZM11.4686 18.563L6.09469 15.4603V9.30364L7.69167 10.2257V14.2598C7.69167 14.4399 7.78782 14.6064 7.9438 14.6965L11.4686 16.7315V18.563ZM18.9886 10.8173C19.3213 10.6523 19.5319 10.313 19.5319 9.94171V8.13911C19.5319 7.75755 19.0949 7.50713 19.0417 7.49216L12.4561 3.69004C12.2482 3.56986 11.9918 3.56986 11.7837 3.69004L5.10717 7.54475C5.10363 7.54678 5.10027 7.54914 5.09678 7.55117C5.09324 7.55316 5.08971 7.55486 5.08618 7.55689C4.87825 7.67691 4.75 7.89892 4.75 8.13911V15.8486C4.75 16.0888 4.87825 16.3107 5.08618 16.4309L11.8048 20.3098C11.9088 20.3698 12.0248 20.3999 12.1409 20.3999C12.2571 20.3999 12.3731 20.3698 12.4771 20.3098L19.1957 16.4309C19.4036 16.3107 19.5319 16.0888 19.5319 15.8486V13.1974L18.6713 13.6162C18.3751 13.7605 18.1872 14.061 18.1872 14.3903V15.4603L12.8133 18.563V12.4062L18.1872 9.30364V11.2143L18.9886 10.8173Z" fill="white"/>
@@ -74,6 +81,10 @@ const saveAPIKey = async () => {
                     <UIInput id="testing-api-key" v-model:modelValue="localState.testingAPIKey"  placeholder="Enter Testing API Key" />
                     <UIButton id="testing-api"  class='justify-self-center'  @click="saveAPIKey" v-bind:loading="localState.loading"  type="primary"> Save API Key </UIButton>
                 </div>
+            </div>
+            </div>
+            <div class="px-10 pb-8">
+                <SupportLink />
             </div>
         </div>
         <div class='w-1/2 h-full flex justify-center items-center bg-primary-700 bg-gradient-to-tr from-primary-900 to-primary-500'>
@@ -133,15 +144,29 @@ const saveAPIKey = async () => {
 </template>
 
 <style>
-#wpbody-content, #wpbody, #wpcontent {
-    display: block ;
-    height : 100vh !important;
-    /* width: 100% ; */
+html.lc-auth-wall-active #wpbody-content,
+html.lc-auth-wall-active #wpbody,
+html.lc-auth-wall-active #wpcontent {
+    display: block;
+    height: calc(100vh - var(--wp-admin--admin-bar--height, 32px)) !important;
+    overflow: hidden;
 }
-#wpbody-content #app , #wpbody-content{
-    padding : 0 !important ;
+
+html.lc-auth-wall-active #wpbody-content #app {
+    padding: 0 !important;
+    height: 100% !important;
 }
-#wpcontent {
+
+html.lc-auth-wall-active #wpcontent {
     padding-left: 0 !important;
+}
+
+html.lc-auth-wall-active #wpfooter {
+    display: none;
+}
+
+html.lc-auth-wall-active .lc-auth-wall {
+    height: 100%;
+    overflow: hidden;
 }
 </style>
