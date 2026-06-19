@@ -15,6 +15,7 @@ import {
   FileCheck,
   FileSearch,
   Folder,
+  Headset,
   InfoCircle,
   Layout,
   Mail,
@@ -48,6 +49,7 @@ export const FileCheck02Icon = FileCheck;
 export const FileSearch01Icon = FileSearch;
 export const FolderIcon = Folder;
 export const Globe01Icon = World;
+export const HeadsetIcon = Headset;
 export const InfoCircleIcon = InfoCircle;
 export const LayoutTopIcon = Layout;
 export const LinkExternal01Icon = ExternalLink;

@@ -23,6 +23,7 @@ import {
   DotsVerticalIcon,
   AlertTriangleIcon,
   ChevronDownIcon,
+  HeadsetIcon,
 } from "@/icons";
 import Forms from "@/components/apps/Forms.vue";
 import PhoneNumbers from "@/components/apps/PhoneNumbers.vue";
@@ -239,22 +240,7 @@ onMounted(() => {
           @click="openSupportPage"
         >
           <span class="inline-flex items-center gap-2">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <path
-                d="M14 7.667C14 11.244 11.244 14 7.667 14C6.978 14 6.311 13.878 5.689 13.656L2 14.667L3.011 11.022C2.756 10.378 2.556 9.689 2.511 8.956C2.5 8.856 2.5 8.756 2.5 8.667C2.5 5.089 5.089 2.5 8.667 2.5C12.244 2.5 14 5.089 14 7.667Z"
-                stroke="currentColor"
-                stroke-width="1.25"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <HeadsetIcon class="w-4 h-4 shrink-0 text-gray-700" />
             <span class="font-medium">{{ LC_SUPPORT_BUTTON_TEXT }}</span>
           </span>
         </UIButton>
