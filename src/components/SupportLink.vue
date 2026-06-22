@@ -20,11 +20,20 @@ import { HeadsetIcon } from "@/icons";
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  height: 32px;
+  padding: 0 12px;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  font-weight: 500;
   color: #344054;
+  background-color: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 6px;
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .lc-support-link__icon {
@@ -33,9 +42,7 @@ import { HeadsetIcon } from "@/icons";
 
 .lc-support-link:hover {
   color: #1d2939;
-}
-
-.lc-support-link:hover span {
-  text-decoration: underline;
+  background-color: #f9fafb;
+  border-color: #98a2b3;
 }
 </style>
