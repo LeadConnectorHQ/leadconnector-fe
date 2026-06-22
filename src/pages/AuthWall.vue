@@ -58,6 +58,9 @@ const saveAPIKey = async () => {
 <template>
     <div class='lc-auth-wall flex row h-full'>
         <div class='w-1/2 h-full flex flex-col bg-white'>
+            <div class="flex justify-end px-10 pt-8">
+                <SupportLink />
+            </div>
             <div class="flex-1 flex flex-col items-center justify-center pl-10 pr-10">
             <div class="w-1/2">
                 <div>
@@ -82,9 +85,6 @@ const saveAPIKey = async () => {
                     <UIButton id="testing-api"  class='justify-self-center'  @click="saveAPIKey" v-bind:loading="localState.loading"  type="primary"> Save API Key </UIButton>
                 </div>
             </div>
-            </div>
-            <div class="px-10 pb-8">
-                <SupportLink />
             </div>
         </div>
         <div class='w-1/2 h-full flex justify-center items-center bg-primary-700 bg-gradient-to-tr from-primary-900 to-primary-500'>
